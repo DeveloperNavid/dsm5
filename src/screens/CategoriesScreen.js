@@ -2,7 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { SvgXml } from 'react-native-svg';
-import { bipolar,schizophrenia,depression,stress} from '../assets/svgs';
+import { bipolar,schizophrenia,depression,stress,
+romantic,anxiety,physical,eating,insomnia,solok,drug,
+psychologist,asabiShenakhti,
+} from '../assets/svgs';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import CategoryItem from '../components/CategoryItem';
 
@@ -31,47 +34,47 @@ const CategoriesScreen = (props) => {
         },
         {
             id:5,
-            source: stress,
+            source: anxiety,
             name: 'تابلو های بالینی اضطراب',
         },
         {
             id:6,
-            source: bipolar,
+            source: stress,
             name: 'تابلوهای بالینی مربوط به تروما و عوامل استرس زا',
         },
         {
             id:7,
-            source: bipolar,
+            source: physical,
             name: 'تابلو های بالینی نشانه های جسمی',
         },
         {
             id:8,
-            source: bipolar,
+            source: eating,
             name: 'تابلو های بالینی خوردن',
         },
         {
             id:9,
-            source: bipolar,
+            source: insomnia,
             name: 'تابلو های بالینی خواب و بیداری',
         }, {
             id:10,
-            source: bipolar,
+            source: romantic,
             name: 'تابلو های بالینی کژکاری جنسی',
         },{
             id:11,
-            source: bipolar,
+            source: solok,
             name: 'تابلو های بالینی اختلالات ایذایی؛کنترل تکانه و سلوک',
         },{
             id:12,
-            source: bipolar,
+            source: drug,
             name: 'تابلوهای بالینی مربوط به مواد',
         },{
             id:13,
-            source: bipolar,
+            source: asabiShenakhti,
             name: 'تابلوهای عصبی_شناختی',
         },{
             id:14,
-            source: bipolar,
+            source: psychologist,
             name: 'تابلوهایی با سبب شناسی طبی',
         },
     ];

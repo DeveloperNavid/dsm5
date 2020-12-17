@@ -14,7 +14,7 @@ const CategoryItem = ({ item, index, onPress }) => {
                     <Text style={styles.title}>{item.name}</Text>
                     <Text style={styles.row}>{index + 1}</Text>
                 </View>
-                <SvgXml style={styles.logoStyle} fill={color} width={50} height={50} xml={item.source} />
+                <SvgXml style={styles.logoStyle} fill={color} width={150} height={150} xml={item.source} />
             </Card>
         </TouchableWithoutFeedback>
     );
