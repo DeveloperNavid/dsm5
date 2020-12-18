@@ -63,15 +63,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     }, title: {
         alignSelf: 'center',
-        fontSize: 17,
-        color: '#1E281E',
+        fontSize: 14,
+        color: 'gray',
         fontWeight: '400',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily:'IRANSansWeb(FaNum)',
     },
     row: {
-        fontSize: 17,
+        fontSize: 14,
         color: 'white',
         textAlign: 'center',
+        fontFamily:'IRANSansWeb(FaNum)'
         // fontWeight: '400',
 
     },

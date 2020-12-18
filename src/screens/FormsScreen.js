@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import {SvgXml} from 'react-native-svg';
-import {logoWhite} from '../assets/svgs';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { SvgXml } from 'react-native-svg';
+import { logoWhite } from '../assets/svgs';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormItem from '../components/FormItem';
+import CustomHeader from '../components/CustomHeader';
 
 const FormsScreen = (props) => {
     const tempList = [
@@ -78,17 +79,14 @@ const FormsScreen = (props) => {
     ];
     return (
         <PatternBackground>
-            <View style={styles.container}>
-                <SvgXml style={styles.logoStyle} width={100} height={100} xml={logoWhite}/>
-                <Text style={styles.title}>شاخصه های اصلی</Text>
-            </View>
+            <CustomHeader title={'فرم ها'} />
             <FlatList
                 data={tempList}
-                style={{marginBottom: hp('20%')}}
-                emptyListComponent={<View><Text>هنوز حسابی ایجاد نکرده اید</Text></View>}
+                style={{ marginBottom: hp('20%') }}
+                emptyListComponent={<View><Text>بدون آیتم </Text></View>}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({item, index}) => (
-                    <FormItem item={item} index={index} onPress={() => props.navigation?.navigate('Tree')}/>
+                renderItem={({ item, index }) => (
+                    <FormItem item={item} index={index} onPress={() => props.navigation?.navigate('Tree')} />
                 )}
             />
         </PatternBackground>

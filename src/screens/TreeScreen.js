@@ -2,11 +2,14 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import CustomHeader from '../components/CustomHeader';
 
 const TreeScreen = (props) => {
 
     return (
         <PatternBackground>
+            <CustomHeader title={'درخت'} />
+
             <View style={styles.container}>
                 <View style={styles.card}>
                     <Text style={styles.title}>this is a question?</Text>
@@ -61,6 +64,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'black',
         fontWeight: '400',
+        fontFamily:'IRANSansWeb(FaNum)'
     },
     button: {
         padding: 100,

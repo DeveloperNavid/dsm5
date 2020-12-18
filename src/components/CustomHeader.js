@@ -32,10 +32,11 @@ const styles = StyleSheet.create({
     },
     title: {
         // flex: 1,
-        color: 'gray',
+        color: '#1E281E',
         textAlign: 'center',
         alignSelf: 'center',
-        fontSize:16
+        fontSize:18,
+        fontFamily:'IRANSansWeb(FaNum)'
     },
     icon: {
         marginHorizontal: 15
