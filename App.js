@@ -10,6 +10,7 @@ import TreeScreen from './src/screens/TreeScreen';
 const Stack = createStackNavigator();
 
 function App() {
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Splash">
