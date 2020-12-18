@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList,ActivityIndicator } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { SvgXml } from 'react-native-svg';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../assets/svgs';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import CategoryItem from '../components/CategoryItem';
+import CustomHeader from '../components/CustomHeader';
 
 const CategoriesScreen = (props) => {
     const tempList = [
@@ -81,14 +82,13 @@ const CategoriesScreen = (props) => {
     ];
     return (
         <PatternBackground>
-            <View style={styles.container}>
-                <SvgXml style={styles.logoStyle} width={100} height={100} xml={bipolar} />
-                <Text style={styles.title}>شاخصه های اصلی</Text>
-            </View>
+            <CustomHeader title={'شاخصه های اصلی'}/> 
             <FlatList
                 data={tempList}
-                style={{ paddingHorizontal: wp('2%') }}
-                emptyListComponent={<View><Text>هنوز حسابی ایجاد نکرده اید</Text></View>}
+                numColumns={2}
+                style={styles.container}
+                contentContainerStyle={styles.contentContainerStyle}
+                emptyListComponent={<View><ActivityIndicator/></View>}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
                     <CategoryItem item={item} index={index} onPress={() => props.navigation?.navigate('Forms')} />
@@ -102,19 +102,11 @@ export default CategoriesScreen;
 
 const styles = StyleSheet.create({
     container: {
-        alignSelf: 'center',
-        width: '100%',
-        flex: 1,
-        marginTop: hp('10%'),
+        // alignItems:'center'
     },
-    logoStyle: {
+    contentContainerStyle: {
         alignSelf: 'center',
-    }, title: {
-        alignSelf: 'center',
-        fontSize: 19,
-        color: 'black',
-        fontWeight: '400',
-    },
+    }, 
 });
 
 

@@ -1,46 +1,78 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { logoWhite } from '../assets/svgs';
 import { SvgXml } from 'react-native-svg';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Card from './Card';
 const color = '#62BA7B'
+
 const CategoryItem = ({ item, index, onPress }) => {
     return (
-        <TouchableWithoutFeedback onPress={onPress}>
-            <Card style={styles.container}>
-                <View>
-                    <Text style={styles.title}>{item.name}</Text>
-                    <Text style={styles.row}>{index + 1}</Text>
+        <TouchableOpacity onPress={onPress} style={{
+
+        }}>
+            <Card style={[styles.container, {
+                borderTopLeftRadius: index % 2 == 0 ? 30 : 5,
+                borderBottomLeftRadius: index % 2 == 0 ? 30 : 5,
+                borderTopRightRadius: index % 2 == 0 ? 5 : 30,
+                borderBottomRightRadius: index % 2 == 0 ? 5 : 30,
+            }]}>
+                <View style={styles.titleNoContainer}>
+                    <View style={[styles.dot, { alignSelf: index % 2 != 0 ? 'flex-end' : 'flex-start' }]}>
+                        <Text style={styles.row}>{index + 1}</Text>
+                    </View>
+                    <Text numberOfLines={2} style={styles.title}>{item.name}</Text>
                 </View>
                 <SvgXml style={styles.logoStyle} width={150} height={150} xml={item.source} />
             </Card>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
     );
 };
 
 export default CategoryItem;
 
 const styles = StyleSheet.create({
+
     container: {
         backgroundColor: 'white',
         alignSelf: 'center',
-        marginVertical: hp('1%'),
-        width: '100%',
+        marginVertical: wp('0.5%'),
+        marginHorizontal: wp('0.5%'),
+        width: wp('45%'),
+        height: hp('30%'),
+        paddingTop: wp('2%'),
+        paddingHorizontal: wp('1%'),
+        justifyContent: 'space-between',
+
+    },
+    dot: {
+        backgroundColor: '#5DA071',
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+
+    },
+    titleNoContainer: {
+        // flexDirection:'row'
     },
     logoStyle: {
         alignSelf: 'center',
     }, title: {
         alignSelf: 'center',
         fontSize: 17,
-        color: 'blue',
+        color: '#1E281E',
         fontWeight: '400',
+        textAlign: 'center'
     },
     row: {
-        alignSelf: 'flex-start',
         fontSize: 17,
-        color: 'purple',
-        fontWeight: '400',
+        color: 'white',
+        textAlign: 'center',
+        // fontWeight: '400',
+
     },
 });
