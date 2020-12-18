@@ -1,19 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import {logoWhite} from '../assets/svgs';
+import { logoWhite } from '../assets/svgs';
 // import {SvgXml} from 'react-native-svg';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
-const FormItem = ({item, index, onPress}) => {
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Card from '../components/Card'
+const FormItem = ({ item, index, onPress }) => {
     return (
-        <TouchableWithoutFeedback onPress={onPress}>
-            <View style={styles.container}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.row}>{index + 1}</Text>
-                {/*<SvgXml style={styles.logoStyle} width={50} height={50} xml={logoWhite}/>*/}
-            </View>
-        </TouchableWithoutFeedback>
+        <Card style={styles.container}>
+            <TouchableOpacity onPress={onPress} style={styles.touch}>
+                <Text numberOfLines={2} style={styles.title}>{item.name}</Text>
+                <View style={[styles.dot, { alignSelf: 'flex-end' }]}>
+                    <Text style={styles.row}>{index + 1}</Text>
+                </View>
+            </TouchableOpacity>
+        </Card>
     );
 };
 
@@ -21,25 +22,43 @@ export default FormItem;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'pink',
-        alignSelf: 'center',
         marginTop: 10,
         width: '100%',
+        backgroundColor: 'white',
+        borderBottomRightRadius: 20,
+        borderTopRightRadius:5,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius:5,
     },
-    logoStyle: {
-        alignSelf: 'center',
+    touch: {
+        // alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        // backgroundColor: 'red'
+    },
+    dot: {
+        backgroundColor: '#5DA071',
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        margin: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+
+
     }, title: {
         alignSelf: 'center',
-        marginTop: 15,
-        fontSize: 17,
-        color: 'blue',
+        fontSize: 14,
+        color: 'gray',
         fontWeight: '400',
+        textAlign: 'center',
+        fontFamily: 'IRANSansWeb(FaNum)',
     },
     row: {
-        alignSelf: 'flex-start',
-        marginTop: 15,
-        fontSize: 17,
-        color: 'purple',
-        fontWeight: '400',
+        fontSize: 14,
+        color: 'white',
+        textAlign: 'center',
+        fontFamily: 'IRANSansWeb(FaNum)'
     },
 });

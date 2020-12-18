@@ -82,7 +82,7 @@ const FormsScreen = (props) => {
             <CustomHeader title={'فرم ها'} />
             <FlatList
                 data={tempList}
-                style={{ marginBottom: hp('20%') }}
+                style={styles.list}
                 emptyListComponent={<View><Text>بدون آیتم </Text></View>}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
@@ -96,20 +96,10 @@ const FormsScreen = (props) => {
 export default FormsScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        alignSelf: 'center',
-        width: '100%',
-        flex: 1,
-        marginTop: hp('10%'),
-    },
-    logoStyle: {
-        alignSelf: 'center',
-    }, title: {
-        alignSelf: 'center',
-        fontSize: 19,
-        color: 'black',
-        fontWeight: '400',
-    },
+   
+    list: {
+       marginHorizontal:10
+    }, 
 });
 
 
