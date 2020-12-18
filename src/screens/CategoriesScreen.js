@@ -15,6 +15,8 @@ import SQLite from 'react-native-sqlite-storage';
 
 const CategoriesScreen = (props) => {
 
+    const [list, setList] = React.useState([])
+
     const db = SQLite.openDatabase(
         {
             name: 'dsm5.db',
@@ -29,20 +31,28 @@ const CategoriesScreen = (props) => {
         },
     );
 
-    db.transaction(tx => {
-        tx.executeSql('SELECT * FROM categories;', [], (tx, results) => {
-            const rows = results.rows;
-            for (let i = 0; i < rows.length; i++) {
-                console.log(rows.item(i));
-            }
+    useEffect(() => {
+        db.transaction(tx => {
+            tx.executeSql('SELECT * FROM categories;', [], (tx, results) => {
+                const rows = results.rows;
+                let categories = [];
+        
+                for (let i = 0; i < rows.length; i++) {
+                  categories.push({
+                    ...rows.item(i),
+                  });
+                }
+                setList(categories)
+            });
         });
-    });
+    })
+    
 
     return (
         <PatternBackground>
             <CustomHeader title={'شاخصه های اصلی'}/>
             <FlatList
-                data={tempList}
+                data={list}
                 numColumns={2}
                 style={styles.container}
                 contentContainerStyle={styles.contentContainerStyle}
