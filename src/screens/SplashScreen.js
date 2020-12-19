@@ -11,7 +11,7 @@ const SplashScreen = (props) => {
         setTimeout(() => {
             props.navigation?.navigate('Categories');
         }, 2000);
-    });
+    }, []);
 
     return (
         <PatternBackground>

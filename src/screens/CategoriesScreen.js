@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {SvgXml} from 'react-native-svg';
@@ -15,38 +15,34 @@ import SQLite from 'react-native-sqlite-storage';
 
 const CategoriesScreen = (props) => {
 
-    const [list, setList] = React.useState([])
-
-    const db = SQLite.openDatabase(
-        {
-            name: 'dsm5.db',
-            location: 'default',
-            createFromLocation: '~www/dsm5.db',
-        },
-        () => {
-            console.log('YESSSSSSSSSSS');
-        },
-        error => {
-            console.log(error);
-        },
-    );
+    const [list, setList] = useState([]);
 
     useEffect(() => {
+        const db = SQLite.openDatabase(
+            {
+                name: 'dsm5.db',
+                location: 'default',
+                createFromLocation: '~www/dsm5.db',
+            },
+            () => {
+            },
+            error => {
+                console.log(error);
+            },
+        );
         db.transaction(tx => {
-            tx.executeSql('SELECT * FROM categories;', [], (tx, results) => {
+            tx.executeSql('SELECT * FROM category;', [], (tx, results) => {
                 const rows = results.rows;
                 let categories = [];
-        
                 for (let i = 0; i < rows.length; i++) {
-                  categories.push({
-                    ...rows.item(i),
-                  });
+                    categories.push({
+                        ...rows.item(i),
+                    });
                 }
-                setList(categories)
+                setList(categories);
             });
         });
-    })
-    
+    }, []);
 
     return (
         <PatternBackground>
@@ -59,7 +55,8 @@ const CategoriesScreen = (props) => {
                 emptyListComponent={<View><ActivityIndicator/></View>}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item, index}) => (
-                    <CategoryItem item={item} index={index} onPress={() => props.navigation?.navigate('Forms')}/>
+                    <CategoryItem item={item} index={index}
+                                  onPress={() => props.navigation?.navigate('Forms', {test: 'tets'})}/>
                 )}
             />
         </PatternBackground>

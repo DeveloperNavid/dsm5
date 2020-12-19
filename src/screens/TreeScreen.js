@@ -1,40 +1,109 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Button, FlatList, TouchableOpacity} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import CustomHeader from '../components/CustomHeader';
+import SQLite from 'react-native-sqlite-storage';
+import Card from '../components/Card';
 
 const TreeScreen = (props) => {
 
-    return (
-        <PatternBackground>
-            <CustomHeader title={'درخت'} />
+    const [currentTree, setCurrentTree] = useState([]);
+    const [showButtons, setShowButtons] = useState(true);
+    var formId = 1;
 
-            <View style={styles.container}>
-                <View style={styles.card}>
-                    <Text style={styles.title}>this is a question?</Text>
-                </View>
+    useEffect(() => {
+        const db = SQLite.openDatabase(
+            {
+                name: 'dsm5.db',
+                location: 'default',
+                createFromLocation: '~www/dsm5.db',
+            },
+            () => {
+            },
+            error => {
+                console.log(error);
+            },
+        );
+        db.transaction(tx => {
+            tx.executeSql('SELECT * FROM tree WHERE formId = ' + '\'' + formId + '\'', [], (tx, results) => {
+                const rows = results.rows;
+                console.log(rows.item(0));
+                setCurrentTree(rows.item(0));
+            });
+        });
+    }, []);
 
-                <View style={styles.buttonLayout}>
-                    <Button title={'YES'} style={styles.button} onPress={() =>
-                        getNextQuestion(true)
-                    }/>
-                    <Button title={'NO'} style={styles.button} onPress={() =>
-                        getNextQuestion(false)
-                    }/>
+    function runTreeQuery(targetId) {
+        const db = SQLite.openDatabase(
+            {
+                name: 'dsm5.db',
+                location: 'default',
+                createFromLocation: '~www/dsm5.db',
+            },
+            () => {
+            },
+            error => {
+                console.log(error);
+            },
+        );
+        db.transaction(tx => {
+            tx.executeSql('SELECT * FROM tree WHERE formId = \'' + formId + '\' AND id= \'' + targetId + '\'', [], (tx, results) => {
+                const rows = results.rows;
+                console.log(rows.item(0));
+                setCurrentTree(rows.item(0));
+                if (rows.item(0).yesId == null && rows.item(0).noId == null) {
+                    setShowButtons(false);
+                }
+            });
+        });
+    }
+
+    if (showButtons) {
+        return (
+            <PatternBackground>
+                <CustomHeader title={'درخت'}/>
+                <View style={styles.container}>
+                    <Card style={styles.card}>
+                        <Text style={styles.title}>{currentTree.title}</Text>
+                    </Card>
+                    < View style={styles.buttonLayout}>
+                        < Button title={'YES'} style={styles.button} onPress={() =>
+                            getNextQuestion(true)
+                        }/>
+                        <Button title={'NO'} style={styles.button} onPress={() =>
+                            getNextQuestion(false)
+                        }/>
+                    </View>
                 </View>
-            </View>
-        </PatternBackground>
-    );
+            </PatternBackground>
+        );
+    } else {
+        return (
+            <PatternBackground>
+                <CustomHeader title={'درخت'}/>
+                <View style={styles.container}>
+                    <View style={styles.card}>
+                        <Text style={styles.title}>{currentTree.title}</Text>
+                    </View>
+                </View>
+            </PatternBackground>
+        );
+    }
 
     function getNextQuestion(answerStatus) {
         if (answerStatus) {
-            //TODO:// get query for yesId,s tree
-            alert('this is Yes answer');
+            if (currentTree.yesId != null) {
+                runTreeQuery(currentTree.yesId);
+            } else {
+                alert('Not exist answer');
+            }
         } else {
-            //TODO:// get query for noId,s tree
-            alert('this is No answer');
-
+            if (currentTree.noId != null) {
+                runTreeQuery(currentTree.noId);
+            } else {
+                alert('Not exist answer');
+            }
         }
     }
 };
@@ -50,12 +119,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     card: {
+        alignSelf: 'center',
+        width: wp('95%'),
+        paddingHorizontal: wp('2%'),
         backgroundColor: 'floralwhite',
-        borderRadius: 5,
+        borderRadius: 15,
         height: 250,
-        padding: 50,
-        marginLeft: 45,
-        marginRight: 45,
         justifyContent: 'center',
     },
     title: {
@@ -64,7 +133,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'black',
         fontWeight: '400',
-        fontFamily:'IRANSansWeb(FaNum)'
+        fontFamily: 'IRANSansWeb(FaNum)',
     },
     button: {
         padding: 100,
@@ -73,7 +142,6 @@ const styles = StyleSheet.create({
     },
     buttonLayout: {
         justifyContent: 'space-around',
-        backgroundColor: 'purple',
         marginTop: 100,
         flexDirection: 'row',
     },

@@ -22,7 +22,7 @@ const CategoryItem = ({ item, index, onPress }) => {
                     <View style={[styles.dot, { alignSelf: index % 2 != 0 ? 'flex-end' : 'flex-start' }]}>
                         <Text style={styles.row}>{index + 1}</Text>
                     </View>
-                    <Text numberOfLines={2} style={styles.title}>{item.name}</Text>
+                    <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
                 </View>
                 <SvgXml style={styles.logoStyle} width={150} height={150} xml={item.source} />
             </Card>

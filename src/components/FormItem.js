@@ -9,7 +9,7 @@ const FormItem = ({ item, index, onPress }) => {
     return (
         <Card style={styles.container}>
             <TouchableOpacity onPress={onPress} style={styles.touch}>
-                <Text numberOfLines={2} style={styles.title}>{item.name}</Text>
+                <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
                 <View style={[styles.dot, { alignSelf: 'flex-end' }]}>
                     <Text style={styles.row}>{index + 1}</Text>
                 </View>
