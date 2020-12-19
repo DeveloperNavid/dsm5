@@ -70,9 +70,9 @@ const TreeScreen = (props) => {
                         <Text style={styles.title}>{currentTree.title}</Text>
                     </Card>
                     <View style={styles.buttonLayout}>
-                        <SvgXml onPress={() => getNextQuestion(true)}
-                            style={styles.logoStyle} width={100} height={100} xml={cancel} />
                         <SvgXml onPress={() => getNextQuestion(false)}
+                            style={styles.logoStyle} width={100} height={100} xml={cancel} />
+                        <SvgXml onPress={() => getNextQuestion(true)}
                             style={styles.logoStyle} width={100} height={100} xml={ok} />
                     </View>
                 </View>

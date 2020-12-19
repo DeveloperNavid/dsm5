@@ -10,7 +10,7 @@ import SQLite from 'react-native-sqlite-storage';
 const CategoriesScreen = (props) => {
 
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const db = SQLite.openDatabase(

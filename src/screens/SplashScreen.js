@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {SvgXml} from 'react-native-svg';
-import {logoWhite} from '../assets/svgs';
+import {logoWhite,appLogo} from '../assets/svgs';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const SplashScreen = (props) => {
@@ -14,12 +14,12 @@ const SplashScreen = (props) => {
     }, []);
 
     return (
-        <PatternBackground>
+        // <PatternBackground>
             <View style={styles.container}>
-                <SvgXml style={styles.logoStyle} width={100} height={100} xml={logoWhite}/>
+                <SvgXml style={styles.logoStyle} width={200} height={200} xml={appLogo}/>
                 <Text style={styles.title}>شناسایی اختلال dsm5</Text>
             </View>
-        </PatternBackground>
+        // </PatternBackground>
     );
 };
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 15,
         fontSize: 17,
-        color: 'white',
+        color: 'gray',
         fontWeight: '400',
         fontFamily:'IRANSansWeb(FaNum)',
 
