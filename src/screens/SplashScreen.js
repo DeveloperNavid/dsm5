@@ -17,7 +17,7 @@ const SplashScreen = (props) => {
         <PatternBackground>
             <View style={styles.container}>
                 <SvgXml style={styles.logoStyle} width={100} height={100} xml={logoWhite}/>
-                <Text style={styles.title}>dsm5</Text>
+                <Text style={styles.title}>شناسایی اختلال dsm5</Text>
             </View>
         </PatternBackground>
     );
@@ -40,5 +40,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'white',
         fontWeight: '400',
+        fontFamily:'IRANSansWeb(FaNum)',
+
     },
 });

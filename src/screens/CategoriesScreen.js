@@ -1,13 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import {SvgXml} from 'react-native-svg';
-import {
-    bipolar, schizophrenia, depression, stress,
-    romantic, anxiety, physical, eating, insomnia, solok, drug,
-    psychologist, asabiShenakhti, asabiRoshdi,
-} from '../assets/svgs';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { SvgXml } from 'react-native-svg';
 import CategoryItem from '../components/CategoryItem';
 import CustomHeader from '../components/CustomHeader';
 import SQLite from 'react-native-sqlite-storage';
@@ -16,6 +10,7 @@ import SQLite from 'react-native-sqlite-storage';
 const CategoriesScreen = (props) => {
 
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const db = SQLite.openDatabase(
@@ -40,25 +35,32 @@ const CategoriesScreen = (props) => {
                     });
                 }
                 setList(categories);
+                setLoading(false)
             });
         });
     }, []);
 
     return (
         <PatternBackground>
-            <CustomHeader title={'شاخصه های اصلی'}/>
-            <FlatList
-                data={list}
-                numColumns={2}
-                style={styles.container}
-                contentContainerStyle={styles.contentContainerStyle}
-                emptyListComponent={<View><ActivityIndicator/></View>}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({item, index}) => (
-                    <CategoryItem item={item} index={index}
-                                  onPress={() => props.navigation?.navigate('Forms', {test: 'tets'})}/>
-                )}
-            />
+            <CustomHeader title={'شاخصه های اصلی'} />
+            {loading ?
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator color='black' size='large' />
+                </View>
+                :
+                <FlatList
+                    data={list}
+                    numColumns={2}
+                    style={styles.container}
+                    contentContainerStyle={styles.contentContainerStyle}
+                    emptyListComponent={<View><ActivityIndicator /></View>}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => (
+                        <CategoryItem item={item} index={index}
+                            onPress={() => props.navigation?.navigate('Forms', { categoryId: item.id })} />
+                    )}
+                />
+            }
         </PatternBackground>
     );
 };
@@ -72,6 +74,11 @@ const styles = StyleSheet.create({
     contentContainerStyle: {
         alignSelf: 'center',
     },
+    loadingContainer:{
+        flex:1,
+        height:'100%',
+        width:'100%',
+    }
 });
 
 

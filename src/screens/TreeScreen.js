@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, Button, FlatList, TouchableOpacity} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import CustomHeader from '../components/CustomHeader';
 import SQLite from 'react-native-sqlite-storage';
 import Card from '../components/Card';
+import { cancel, ok } from '../assets/svgs';
+import { SvgXml } from 'react-native-svg';
 
 const TreeScreen = (props) => {
 
@@ -62,18 +64,16 @@ const TreeScreen = (props) => {
     if (showButtons) {
         return (
             <PatternBackground>
-                <CustomHeader title={'درخت'}/>
+                <CustomHeader title={'درخت'} />
                 <View style={styles.container}>
                     <Card style={styles.card}>
                         <Text style={styles.title}>{currentTree.title}</Text>
                     </Card>
-                    < View style={styles.buttonLayout}>
-                        < Button title={'YES'} style={styles.button} onPress={() =>
-                            getNextQuestion(true)
-                        }/>
-                        <Button title={'NO'} style={styles.button} onPress={() =>
-                            getNextQuestion(false)
-                        }/>
+                    <View style={styles.buttonLayout}>
+                        <SvgXml onPress={() => getNextQuestion(true)}
+                            style={styles.logoStyle} width={100} height={100} xml={cancel} />
+                        <SvgXml onPress={() => getNextQuestion(false)}
+                            style={styles.logoStyle} width={100} height={100} xml={ok} />
                     </View>
                 </View>
             </PatternBackground>
@@ -81,7 +81,7 @@ const TreeScreen = (props) => {
     } else {
         return (
             <PatternBackground>
-                <CustomHeader title={'درخت'}/>
+                <CustomHeader title={'درخت'} />
                 <View style={styles.container}>
                     <View style={styles.card}>
                         <Text style={styles.title}>{currentTree.title}</Text>
@@ -144,5 +144,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 100,
         flexDirection: 'row',
+    },
+    logoStyle: {
+
     },
 });
