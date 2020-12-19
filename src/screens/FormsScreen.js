@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { SvgXml } from 'react-native-svg';
-import { cancel,ok } from '../assets/svgs';
+import { reject,accept } from '../assets/svgs';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormItem from '../components/FormItem';
 import CustomHeader from '../components/CustomHeader';
@@ -40,7 +40,7 @@ const FormsScreen = ({ route, navigation }) => {
         });
     }, []);
 
-  
+
     return (
         <PatternBackground>
             <CustomHeader title={'فرم ها'} />

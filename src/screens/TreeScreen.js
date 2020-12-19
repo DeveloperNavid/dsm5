@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, FlatList, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Button, FlatList, TouchableOpacity} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import CustomHeader from '../components/CustomHeader';
 import SQLite from 'react-native-sqlite-storage';
 import Card from '../components/Card';
-import { cancel, ok } from '../assets/svgs';
-import { SvgXml } from 'react-native-svg';
+import {reject, rejectDisable, accept, acceptDisable} from '../assets/svgs';
+import {SvgXml} from 'react-native-svg';
 
 const TreeScreen = (props) => {
 
     const [currentTree, setCurrentTree] = useState([]);
-    const [showButtons, setShowButtons] = useState(true);
+    // const [showButtons, setShowButtons] = useState(true);
     var formId = 1;
 
     useEffect(() => {
@@ -54,42 +54,48 @@ const TreeScreen = (props) => {
                 const rows = results.rows;
                 console.log(rows.item(0));
                 setCurrentTree(rows.item(0));
-                if (rows.item(0).yesId == null && rows.item(0).noId == null) {
-                    setShowButtons(false);
-                }
+                // if (rows.item(0).yesId == null && rows.item(0).noId == null) {
+                //     setShowButtons(false);
+                // }
             });
         });
     }
 
-    if (showButtons) {
-        return (
-            <PatternBackground>
-                <CustomHeader title={'درخت'} />
-                <View style={styles.container}>
-                    <Card style={styles.card}>
-                        <Text style={styles.title}>{currentTree.title}</Text>
-                    </Card>
-                    <View style={styles.buttonLayout}>
-                        <SvgXml onPress={() => getNextQuestion(false)}
-                            style={styles.logoStyle} width={100} height={100} xml={cancel} />
-                        <SvgXml onPress={() => getNextQuestion(true)}
-                            style={styles.logoStyle} width={100} height={100} xml={ok} />
-                    </View>
+    // if (showButtons) {
+    return (
+        <PatternBackground>
+            <CustomHeader title={'درخت'}/>
+            <View style={styles.container}>
+                <Card style={styles.card}>
+                    <Text style={styles.title}>{currentTree.title}</Text>
+                </Card>
+                <View style={styles.buttonLayout}>
+                    {
+                        currentTree.noId != null ?
+                            <SvgXml onPress={() => getNextQuestion(false)} style={styles.logoStyle} width={100}
+                                    height={100} xml={reject}/>
+                            :
+                            currentTree.noId == null && currentTree.yesId == null ?
+                                null
+                                :
+                                <SvgXml style={styles.logoStyle} width={100}
+                                        height={100} xml={rejectDisable}/>
+                    }
+                    {
+                        currentTree.yesId != null ?
+                            <SvgXml onPress={() => getNextQuestion(true)} style={styles.logoStyle} width={100}
+                                    height={100} xml={accept}/>
+                            :
+                            currentTree.noId == null && currentTree.yesId == null ?
+                                null
+                                :
+                                <SvgXml style={styles.logoStyle} width={100}
+                                        height={100} xml={acceptDisable}/>
+                    }
                 </View>
-            </PatternBackground>
-        );
-    } else {
-        return (
-            <PatternBackground>
-                <CustomHeader title={'درخت'} />
-                <View style={styles.container}>
-                    <View style={styles.card}>
-                        <Text style={styles.title}>{currentTree.title}</Text>
-                    </View>
-                </View>
-            </PatternBackground>
-        );
-    }
+            </View>
+        </PatternBackground>
+    );
 
     function getNextQuestion(answerStatus) {
         if (answerStatus) {
@@ -145,7 +151,5 @@ const styles = StyleSheet.create({
         marginTop: 100,
         flexDirection: 'row',
     },
-    logoStyle: {
-
-    },
+    logoStyle: {},
 });
