@@ -60,7 +60,7 @@ const TreeScreen = ({route, navigation}) => {
     // if (showButtons) {
     return (
         <PatternBackground>
-            <CustomHeader title={'درخت'}/>
+            <CustomHeader title={' Decision Tree'}/>
             <View style={styles.container}>
                 <Card style={styles.card}>
                     <Text style={styles.title}>{currentTree.title}</Text>

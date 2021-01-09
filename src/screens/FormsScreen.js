@@ -43,7 +43,7 @@ const FormsScreen = ({ route, navigation }) => {
 
     return (
         <PatternBackground>
-            <CustomHeader title={'فرم ها'} />
+            <CustomHeader title={'Forms'} />
             <FlatList
                 data={list}
                 style={styles.list}
