@@ -7,7 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Card from './Card';
 const color = '#62BA7B'
 
-const CategoryItem = ({ item, index, onPress }) => {
+const CategoryGridItem = ({ item, index, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress} style={{
 
@@ -30,7 +30,7 @@ const CategoryItem = ({ item, index, onPress }) => {
     );
 };
 
-export default CategoryItem;
+export default CategoryGridItem;
 
 const styles = StyleSheet.create({
 

@@ -8,11 +8,10 @@ import Card from '../components/Card';
 import {reject, rejectDisable, accept, acceptDisable} from '../assets/svgs';
 import {SvgXml} from 'react-native-svg';
 
-const TreeScreen = (props) => {
+const TreeScreen = ({route, navigation}) => {
 
     const [currentTree, setCurrentTree] = useState([]);
-    // const [showButtons, setShowButtons] = useState(true);
-    var formId = 1;
+    const {formId} = route.params;
 
     useEffect(() => {
         const db = SQLite.openDatabase(
@@ -54,9 +53,6 @@ const TreeScreen = (props) => {
                 const rows = results.rows;
                 console.log(rows.item(0));
                 setCurrentTree(rows.item(0));
-                // if (rows.item(0).yesId == null && rows.item(0).noId == null) {
-                //     setShowButtons(false);
-                // }
             });
         });
     }

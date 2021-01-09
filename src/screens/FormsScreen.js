@@ -50,7 +50,7 @@ const FormsScreen = ({ route, navigation }) => {
                 emptyListComponent={<View><Text>بدون آیتم </Text></View>}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
-                    <FormItem item={item} index={index} onPress={() => navigation?.navigate('Tree')} />
+                    <FormItem item={item} index={index} onPress={() => navigation?.navigate('Tree', { formId: item.id })} />
                 )}
             />
         </PatternBackground>
