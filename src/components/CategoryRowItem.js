@@ -5,7 +5,7 @@ import { logoWhite } from '../assets/svgs';
 import { SvgXml } from 'react-native-svg';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Card from './Card';
-const color = '#62BA7B'
+const color = '#62BA7B';
 
 const CategoryGridItem = ({ item, index, onPress }) => {
     return (

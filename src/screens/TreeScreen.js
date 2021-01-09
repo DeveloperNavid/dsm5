@@ -7,6 +7,7 @@ import SQLite from 'react-native-sqlite-storage';
 import Card from '../components/Card';
 import {reject, rejectDisable, accept, acceptDisable} from '../assets/svgs';
 import {SvgXml} from 'react-native-svg';
+import CustomButton from '../components/CustomButton';
 
 const TreeScreen = ({route, navigation}) => {
 
@@ -68,26 +69,44 @@ const TreeScreen = ({route, navigation}) => {
                 <View style={styles.buttonLayout}>
                     {
                         currentTree.noId != null ?
-                            <SvgXml onPress={() => getNextQuestion(false)} style={styles.logoStyle} width={100}
-                                    height={100} xml={reject}/>
-                            :
-                            currentTree.noId == null && currentTree.yesId == null ?
-                                null
-                                :
-                                <SvgXml style={styles.logoStyle} width={100}
-                                        height={100} xml={rejectDisable}/>
+                            <CustomButton
+                                onPress={() => getNextQuestion(false)} title={'خیر'} buttonColor={'#5DA071'}/> :
+                            currentTree.noId == null && currentTree.yesId == null ? null :
+                                <CustomButton title={'خیر'} buttonColor={'#767676'}/>
                     }
                     {
                         currentTree.yesId != null ?
-                            <SvgXml onPress={() => getNextQuestion(true)} style={styles.logoStyle} width={100}
-                                    height={100} xml={accept}/>
-                            :
-                            currentTree.noId == null && currentTree.yesId == null ?
-                                null
-                                :
-                                <SvgXml style={styles.logoStyle} width={100}
-                                        height={100} xml={acceptDisable}/>
+                            <CustomButton
+                                onPress={() => getNextQuestion(true)} title={'بله'} buttonColor={'#5DA071'}/> :
+                            currentTree.noId == null && currentTree.yesId == null ? null :
+                                <CustomButton title={'بله'} buttonColor={'#767676'}/>
                     }
+                    {/*IMAGE BUTTONS*/}
+                    {/*{*/}
+                    {/*    currentTree.noId != null ?*/}
+                    {/*        <CustomButton*/}
+                    {/*            onPress={() => getNextQuestion(false)} style={styles.buttonActive} title={'خیر '}/>*/}
+                    {/*        // <SvgXml onPress={() => getNextQuestion(false)} style={styles.logoStyle} width={100}*/}
+                    {/*        //         height={100} xml={reject}/>*/}
+                    {/*        :*/}
+                    {/*        currentTree.noId == null && currentTree.yesId == null ?*/}
+                    {/*            null*/}
+                    {/*            :*/}
+                    {/*            <CustomButton style={styles.buttonActive} title={'خیر '}/>*/}
+                    {/*    // <SvgXml style={styles.logoStyle} width={100}*/}
+                    {/*    //         height={100} xml={rejectDisable}/>*/}
+                    {/*}*/}
+                    {/*{*/}
+                    {/*    currentTree.yesId != null ?*/}
+                    {/*        <SvgXml onPress={() => getNextQuestion(true)} style={styles.logoStyle} width={100}*/}
+                    {/*                height={100} xml={accept}/>*/}
+                    {/*        :*/}
+                    {/*        currentTree.noId == null && currentTree.yesId == null ?*/}
+                    {/*            null*/}
+                    {/*            :*/}
+                    {/*            <SvgXml style={styles.logoStyle} width={100}*/}
+                    {/*                    height={100} xml={acceptDisable}/>*/}
+                    {/*}*/}
                 </View>
             </View>
         </PatternBackground>
@@ -148,4 +167,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     logoStyle: {},
+    buttonActive: {
+        backgroundColor: '#5DA071',
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        fontSize: 18,
+        color: '#fff',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+    },
+
 });
