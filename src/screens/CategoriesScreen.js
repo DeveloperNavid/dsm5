@@ -1,51 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {SvgXml} from 'react-native-svg';
 import CategoryGridItem from '../components/CategoryGridItem';
 import CustomHeader from '../components/CustomHeader';
-import SQLite from 'react-native-sqlite-storage';
 import {acceptDisable, gridMode, listMode} from '../assets/svgs';
 import CategoryRowItem from '../components/CategoryRowItem';
-import FormItem from '../components/FormItem';
 
-const CategoriesScreen = (props) => {
+const CategoriesScreen = ({route, navigation}) => {
 
-    const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [gridList, setGridList] = useState(true);
-
-    useEffect(() => {
-        const db = SQLite.openDatabase(
-            {
-                name: 'dsm5.db',
-                location: 'default',
-                createFromLocation: '~www/dsm5.db',
-            },
-            () => {
-            },
-            error => {
-                console.log(error);
-            },
-        );
-        db.transaction(tx => {
-            tx.executeSql('SELECT * FROM category;', [], (tx, results) => {
-                const rows = results.rows;
-                let categories = [];
-                for (let i = 0; i < rows.length; i++) {
-                    categories.push({
-                        ...rows.item(i),
-                    });
-                }
-                setList(categories);
-                setLoading(false);
-            });
-        });
-    }, []);
+    const {list} = route.params;
 
     function changeMenuButton() {
-        // console.log(gridList);
-        // alert(gridList)
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -63,8 +31,7 @@ const CategoriesScreen = (props) => {
             {loading ?
                 <View style={styles.loadingContainer}>
                     <ActivityIndicator color='black' size='large'/>
-                </View>
-                :
+                </View> :
                 <View>
                     {gridList ?
                         <FlatList
@@ -77,10 +44,9 @@ const CategoriesScreen = (props) => {
                             keyExtractor={(item, index) => '_' + index.toString()}
                             renderItem={({item, index}) => (
                                 <CategoryGridItem item={item} index={index}
-                                                  onPress={() => props.navigation?.navigate('Forms', {categoryId: item.id})}/>
+                                                  onPress={() => navigation?.navigate('Forms', {list: item.forms})}/>
                             )}
-                        />
-                        :
+                        /> :
                         <FlatList
                             data={list}
                             key={'#'}
@@ -91,32 +57,29 @@ const CategoriesScreen = (props) => {
                             keyExtractor={(item, index) => '#' + index.toString()}
                             renderItem={({item, index}) => (
                                 <CategoryRowItem item={item} index={index}
-                                                 onPress={() => props.navigation?.navigate('Forms', {categoryId: item.id})}/>
+                                                 onPress={() => navigation?.navigate('Forms', {list: item.forms})}/>
                             )}
                         />
                     }
-                    <View
+                    <TouchableOpacity
+                        onPress={() => changeMenuButton()}
                         style={styles.icon}>
                         {gridList ?
                             <SvgXml
-                                width={40}
-                                height={40}
+                                width={25}
+                                height={25}
                                 xml={listMode}
-                                onPress={() => changeMenuButton()}
-                                // onPress={() => changeMenuButton()} style={styles.logoStyle} width={100}
                             /> :
                             <SvgXml
-                                onPress={() => changeMenuButton()}
-                                width={40}
-                                height={40}
+                                width={25}
+                                height={25}
                                 xml={gridMode}
                             />
                         }
-                    </View>
+                    </TouchableOpacity>
                 </View>
             }
-        </PatternBackground>
-    );
+        </PatternBackground>);
 };
 
 export default CategoriesScreen;
@@ -139,7 +102,8 @@ const styles = StyleSheet.create({
         height: 70,
         borderRadius: 50,
         elevation: 3,
-        backgroundColor: '#5DA071',
+        // backgroundColor: '#5DA071',
+        backgroundColor: '#ffea00',
         alignItems: 'center',
         position: 'absolute',
         marginLeft: 25,

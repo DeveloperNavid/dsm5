@@ -70,7 +70,7 @@ const TreeScreen = ({route, navigation}) => {
                     {
                         currentTree.noId != null ?
                             <CustomButton
-                                onPress={() => getNextQuestion(false)} title={'خیر'} buttonColor={'#5DA071'}/> :
+                                onPress={() => getNextQuestion(false)} title={'خیر'} buttonColor={'#991535'}/> :
                             currentTree.noId == null && currentTree.yesId == null ? null :
                                 <CustomButton title={'خیر'} buttonColor={'#767676'}/>
                     }

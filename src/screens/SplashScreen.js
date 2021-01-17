@@ -2,24 +2,63 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import {SvgXml} from 'react-native-svg';
-import {logoWhite,appLogo} from '../assets/svgs';
+import {logoWhite, appLogo} from '../assets/svgs';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import SQLite from 'react-native-sqlite-storage';
 
 const SplashScreen = (props) => {
 
     useEffect(() => {
-        setTimeout(() => {
-            props.navigation?.navigate('Categories');
-        }, 2000);
+        const db = SQLite.openDatabase(
+            {
+                name: 'dsm5.db',
+                location: 'default',
+                createFromLocation: '~www/dsm5.db',
+            }, () => {
+            },
+            error => {
+                console.log(error);
+            },
+        );
+        db.transaction(tx => {
+            tx.executeSql('SELECT * FROM category;', [], (tx, results) => {
+                const rows = results.rows;
+                let categories = [];
+                for (let i = 0; i < rows.length; i++) {
+                    categories.push({
+                        ...rows.item(i),
+                    });
+                }
+                for (let position in categories) {
+                    let query: String = 'SELECT * FROM form WHERE categoryId = ' + '\'' + categories[position].id + '\'';
+                    db.transaction(tx => {
+                        tx.executeSql(query, [], (tx, results) => {
+                            const rows = results.rows;
+                            let forms = [];
+                            for (let i = 0; i < rows.length; i++) {
+                                forms.push({
+                                    ...rows.item(i),
+                                });
+                            }
+                            let category = categories[position];
+                            Object.assign(category, {'forms': forms});
+                            categories[position] = category;
+                            if (position == categories.length - 1) {
+                                console.log(categories);
+                                props.navigation?.navigate('Categories', {list: categories});
+                            }
+                        });
+                    });
+                }
+            });
+        });
     }, []);
 
     return (
-        // <PatternBackground>
-            <View style={styles.container}>
-                <SvgXml style={styles.logoStyle} width={200} height={200} xml={appLogo}/>
-                <Text style={styles.title}>شناسایی اختلال dsm5</Text>
-            </View>
-        // </PatternBackground>
+        <View style={styles.container}>
+            <SvgXml style={styles.logoStyle} width={200} height={200} xml={appLogo}/>
+            <Text style={styles.title}>شناسایی اختلال dsm5</Text>
+        </View>
     );
 };
 
@@ -34,13 +73,13 @@ const styles = StyleSheet.create({
     },
     logoStyle: {
         alignSelf: 'center',
-    }, title: {
+    },
+    title: {
         alignSelf: 'center',
         marginTop: 15,
         fontSize: 17,
         color: 'gray',
         fontWeight: '400',
-        fontFamily:'IRANSansWeb(FaNum)',
-
+        fontFamily: 'IRANSansWeb(FaNum)',
     },
 });
