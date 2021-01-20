@@ -1,25 +1,15 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import PatternBackground from '../components/PatternBackground';
-import {logoWhite} from '../assets/svgs';
-import {SvgXml} from 'react-native-svg';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
 
-const color = '#62BA7B';
-
-const CategoryGridItem = ({item, index, onPress}) => {
+const CategoryGridItem = ({ item, index, onPress }) => {
     return (
-        // <Card style={styles.container}>
-        <View>
-            <TouchableOpacity onPress={onPress} style={styles.touch}>
+        <Card style={styles.container}>
+            <View onPress={onPress} style={styles.touch}>
                 <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
-                {/*<View style={[styles.dot, { alignSelf: 'flex-end' }]}>*/}
                 <Text style={styles.row}>{index + 1}</Text>
-                {/*</View>*/}
-            </TouchableOpacity>
-        </View>
-        // </Card>
+            </View>
+        </Card>
     );
 };
 

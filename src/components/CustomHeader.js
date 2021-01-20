@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {SvgXml} from 'react-native-svg';
-import {appLogo} from '../assets/svgs';
+import { StyleSheet, View, Text } from 'react-native';
+import { SvgXml } from 'react-native-svg';
+import { appLogo } from '../assets/svgs';
 
-const CustomHeader = ({title}) => {
+const CustomHeader = ({ title }) => {
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
-            <SvgXml style={styles.icon} width={50} height={50} xml={appLogo}/>
+            <SvgXml style={styles.icon} width={50} height={50} xml={appLogo} />
             {/* <Icon
                 style={styles.icon}
                 type='Ionicons'
