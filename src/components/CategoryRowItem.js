@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     }, title: {
         alignSelf: 'center',
         fontSize: 16,
-        fontWeight: '400',
+        fontWeight: 'bold',
         textAlign: 'center',
         color: 'black',
         fontFamily: 'IRANSansWeb(FaNum)',
@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
         color: 'black',
         marginLeft: 10,
         textAlign: 'center',
+        marginRight:10,
+        // fontWeight: 'bold',
         fontFamily: 'IRANSansWeb(FaNum)',
         alignSelf: 'flex-end',
     },

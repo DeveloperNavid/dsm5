@@ -4,7 +4,6 @@ import { SvgXml } from 'react-native-svg';
 import { appLogo } from '../assets/svgs';
 
 const CustomHeader = ({ title }) => {
-
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 50,
         alignItems: 'center',
+        marginBottom:5
     },
     title: {
         // flex: 1,
@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 18,
         fontFamily: 'IRANSansWeb(FaNum)',
+        fontWeight: 'bold',
+
     },
     icon: {
         marginHorizontal: 15,

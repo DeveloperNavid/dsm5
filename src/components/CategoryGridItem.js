@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { logoWhite } from '../assets/svgs';
 import { SvgXml } from 'react-native-svg';
@@ -9,38 +9,38 @@ const color = '#62BA7B'
 
 const CategoryGridItem = ({ item, index, onPress }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={{
-
-        }}>
+        <Pressable onPress={onPress}>
             <Card style={[styles.container, {
-                borderTopLeftRadius: index % 2 == 0 ? 30 : 5,
-                borderBottomLeftRadius: index % 2 == 0 ? 30 : 5,
-                borderTopRightRadius: index % 2 == 0 ? 5 : 30,
-                borderBottomRightRadius: index % 2 == 0 ? 5 : 30,
+                borderRadius: 10
+                // borderTopLeftRadius: index % 2 == 0 ? 30 : 5,
+                // borderBottomLeftRadius: index % 2 == 0 ? 30 : 5,
+                // borderTopRightRadius: index % 2 == 0 ? 5 : 30,
+                // borderBottomRightRadius: index % 2 == 0 ? 5 : 30,
             }]}>
                 <View style={styles.titleNoContainer}>
-                    <View style={[styles.dot, { alignSelf: index % 2 != 0 ? 'flex-end' : 'flex-start' }]}>
-                        <Text style={styles.row}>{index + 1}</Text>
-                    </View>
                     <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
                 </View>
-                <SvgXml style={styles.logoStyle} width={150} height={150} xml={item.source} />
+                <View>
+                    <SvgXml style={styles.logoStyle} width={wp('35%')} height={150} xml={item.source} />
+                    <View style={[styles.dot, { alignSelf: 'flex-start',marginTop:-15,marginBottom:5 }]}>
+                        <Text style={styles.row}>{index + 1}</Text>
+                    </View>
+                </View>
             </Card>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 
 export default CategoryGridItem;
 
 const styles = StyleSheet.create({
-
     container: {
         backgroundColor: 'white',
         alignSelf: 'center',
         marginVertical: wp('0.5%'),
         marginHorizontal: wp('0.5%'),
         width: wp('45%'),
-        height: hp('30%'),
+        height: 240,//hp('30%'),
         paddingTop: wp('2%'),
         paddingHorizontal: wp('1%'),
         justifyContent: 'space-between',
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
-
     },
     titleNoContainer: {
         // flexDirection:'row'
@@ -65,15 +64,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 14,
         color: 'gray',
-        fontWeight: '400',
+        fontWeight: 'bold',
         textAlign: 'center',
-        fontFamily:'IRANSansWeb(FaNum)',
+        fontFamily: 'IRANSansWeb(FaNum)',
     },
     row: {
         fontSize: 14,
         color: 'white',
         textAlign: 'center',
-        fontFamily:'IRANSansWeb(FaNum)'
+        fontFamily: 'IRANSansWeb(FaNum)'
         // fontWeight: '400',
 
     },

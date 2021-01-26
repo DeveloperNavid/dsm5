@@ -13,7 +13,8 @@ export default function OptionsList({ list, navigation }) {
             emptyListComponent={<View><ActivityIndicator /></View>}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-                <OptionItem item={item} index={index} onPress={() => navigation.navigate(item.screen)} />
+                <OptionItem item={item} index={index} 
+                onPress={() => navigation.navigate(item.screen)} />
             )}
         />
     )

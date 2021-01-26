@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
 import { logoWhite } from '../assets/svgs';
 // import {SvgXml} from 'react-native-svg';
@@ -8,12 +8,12 @@ import Card from '../components/Card'
 const FormItem = ({ item, index, onPress }) => {
     return (
         <Card style={styles.container}>
-            <TouchableOpacity onPress={onPress} style={styles.touch}>
+            <Pressable onPress={onPress} style={styles.touch}>
                 <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
                 <View style={[styles.dot, { alignSelf: 'flex-end' }]}>
                     <Text style={styles.row}>{index + 1}</Text>
                 </View>
-            </TouchableOpacity>
+            </Pressable>
         </Card>
     );
 };
@@ -25,10 +25,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: '100%',
         backgroundColor: 'white',
-        borderBottomRightRadius: 20,
-        borderTopRightRadius:5,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius:5,
+        // borderBottomRightRadius: 20,
+        // borderTopRightRadius:5,
+        // borderTopLeftRadius: 20,
+        // borderBottomLeftRadius:5,
+        borderRadius:10
     },
     touch: {
         // alignSelf: 'center',
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 14,
         color: 'gray',
-        fontWeight: '400',
+        fontWeight: 'bold',
         textAlign: 'center',
         fontFamily: 'IRANSansWeb(FaNum)',
     },

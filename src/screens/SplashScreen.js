@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontSize: 17,
         color: 'gray',
-        fontWeight: '400',
+        fontWeight: 'bold',
         fontFamily: 'IRANSansWeb(FaNum)',
     },
 });

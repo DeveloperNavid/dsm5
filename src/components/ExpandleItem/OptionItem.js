@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Pressable, Text } from 'react-native';
 
 export default function OptionItem({ item, index, onPress }) {
-    console.log('OptionItem', item)
+    // console.log('OptionItem', item)
     return (
         <Pressable style={styles.container} onPress={onPress}>
             <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
@@ -46,15 +46,19 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginHorizontal: 3,
         fontFamily: 'IRANSansWeb(FaNum)',
+        fontWeight: 'bold',
         // color: Constants.Colors.primaryDarkText,
         textAlign: 'right',
     }, rowNumber: {
         alignSelf: 'center',
         fontSize: 14,
         marginHorizontal: 3,
+        // fontWeight: 'bold',
         fontFamily: 'IRANSansWeb(FaNum)',
-        // color: Constants.Colors.primaryDarkText,
+        color: '#030303',
+        // backgroundColor:'#5DA071',
         textAlign: 'right',
+        // width
     },
 
 });

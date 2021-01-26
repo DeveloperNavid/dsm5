@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         fontSize: 17,
         color: 'black',
-        fontWeight: '400',
+        fontWeight: 'bold',
         fontFamily: 'IRANSansWeb(FaNum)',
     },
     button: {

@@ -69,10 +69,12 @@ const CategoriesScreen = ({ route, navigation }) => {
                             <SvgXml
                                 width={25}
                                 height={25}
+                               style={styles.fabIcon}
                                 xml={listMode}
                             /> :
                             <SvgXml
                                 width={25}
+                               style={styles.fabIcon}
                                 height={25}
                                 xml={gridMode}
                             />
@@ -87,11 +89,16 @@ export default CategoriesScreen;
 
 
 const styles = StyleSheet.create({
+    fabIcon:{
+        // backgroundColor:'white'
+    },
     container: {
-        // alignItems:'center'
+        // alignItems:'center',
+        marginBottom:60
     },
     contentContainerStyle: {
         alignSelf: 'center',
+        // marginBottom:30
     },
     loadingContainer: {
         flex: 1,
@@ -101,14 +108,15 @@ const styles = StyleSheet.create({
     icon: {
         width: 70,
         height: 70,
-        borderRadius: 50,
+        borderRadius: 35,
         elevation: 3,
         // backgroundColor: '#5DA071',
-        backgroundColor: '#ffea00',
+        backgroundColor: 'gray',
         alignItems: 'center',
         position: 'absolute',
-        marginLeft: 25,
-        bottom: 100,
+        // alignSelf:'flex-start',
+        right: 15,
+        bottom: 60,
         // padding: 10,
         // right: 10,
 
