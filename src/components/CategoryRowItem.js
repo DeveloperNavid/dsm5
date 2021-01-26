@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 const CategoryGridItem = ({ item, index, onPress }) => {
     return (
@@ -18,13 +19,14 @@ export default CategoryGridItem;
 const styles = StyleSheet.create({
     parent: {},
     container: {
-        marginTop: 10,
-        width: '100%',
+        // marginTop: 10,
+        width: wp('92%'),
         backgroundColor: 'white',
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 5,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 5,
+        borderRadius:10
+        // borderBottomRightRadius: 20,
+        // borderTopRightRadius: 5,
+        // borderTopLeftRadius: 20,
+        // borderBottomLeftRadius: 5,
     },
     touch: {
         // alignSelf: 'center',

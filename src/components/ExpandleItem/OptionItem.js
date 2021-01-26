@@ -5,19 +5,25 @@ export default function OptionItem({ item, index, onPress }) {
     console.log('OptionItem', item)
     return (
         <Pressable style={styles.container} onPress={onPress}>
-            <Text numberOfLines={1} style={styles.title}>{item.title}</Text>
+            <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
+            <Text numberOfLines={1} style={styles.rowNumber}>{`${index + 1} - ${item.categoryId}`}</Text>
         </Pressable>
     );
 };
 
 
-
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'yellow',
-        height:50,
+        flexDirection: 'row',
+        // backgroundColor: 'yellow',
+        marginVertical: 5,
+        marginRight: 15,
+        height: 30,
         // margin: 10,
-        flex: 1
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        alignContent: 'center'
     },
     card: {
         width: 60,
@@ -37,9 +43,18 @@ const styles = StyleSheet.create({
         // color: Constants.Colors.primaryText
     }, title: {
         alignSelf: 'center',
-        fontSize: 10,
+        fontSize: 14,
+        marginHorizontal: 3,
+        fontFamily: 'IRANSansWeb(FaNum)',
         // color: Constants.Colors.primaryDarkText,
-        textAlign: 'center',
+        textAlign: 'right',
+    }, rowNumber: {
+        alignSelf: 'center',
+        fontSize: 14,
+        marginHorizontal: 3,
+        fontFamily: 'IRANSansWeb(FaNum)',
+        // color: Constants.Colors.primaryDarkText,
+        textAlign: 'right',
     },
 
 });

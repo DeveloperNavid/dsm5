@@ -6,18 +6,26 @@ import Animated, { Easing } from 'react-native-reanimated';
 import OptionsList from './OptionsList';
 import CategoryRowItem from '../CategoryRowItem'
 const itemHeight = 50
+const childItemHeight = 40
 
 function ExpandableView({ list, navigation, item, index }) {
-    console.log('ExpandableView', item)
+    // console.log('ExpandableView', item)
     // const { translations } = React.useContext(LocalizationContext);
     const [expand, setExpand] = useState(false);
+
+
     let heightRow1 = useRef(new Value(itemHeight));
+    let childrenHeight = (item.forms.length) * childItemHeight + itemHeight
+
+    React.useEffect(() => {
+        toggleRow1Content()
+    }, [])
 
     const toggleRow1Content = () => {
         if (!expand) {
-            heightRow1.current = runTiming(new Clock(), new Value(itemHeight), new Value(item.forms.length * itemHeight));
+            heightRow1.current = runTiming(new Clock(), new Value(itemHeight), new Value(childrenHeight));
         } else {
-            heightRow1.current = runTiming(new Clock(), new Value(item.forms.length * itemHeight), new Value(itemHeight));
+            heightRow1.current = runTiming(new Clock(), new Value(childrenHeight), new Value(itemHeight));
         }
         setExpand(!expand);
     };
@@ -25,7 +33,7 @@ function ExpandableView({ list, navigation, item, index }) {
     return (
         <View style={styles.container}>
             <Animated.View style={{ height: heightRow1.current }}>
-                <Animated.ScrollView scrollEnabled={false}>
+                <Animated.ScrollView scrollEnabled={false} showsVerticalScrollIndicator={false}>
                     <Pressable onPress={() => toggleRow1Content()}>
                         <CategoryRowItem item={item} index={index} />
                     </Pressable>
@@ -113,11 +121,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     container: {
-        // backgroundColor: 'green',
+        width: '100%',
         // margin: 10,
-        // marginTop: 30,
+        marginTop: 5,
         // height:150,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        // backgroundColor:'green'
     },
     titleContainer: {
         flexDirection: 'row'
@@ -147,9 +156,9 @@ const styles = StyleSheet.create({
         // backgroundColor:'pink'
     }, dashedLine: {
         // height:10,
-        borderColor: 'gray',
-        borderWidth: 0.5,
-        borderStyle: 'dashed',
+        // borderColor: 'gray',
+        // borderWidth: 0.5,
+        // borderStyle: 'dashed',
         // backgroundColor:'yellow',
         flex: 2,
         marginHorizontal: 2,

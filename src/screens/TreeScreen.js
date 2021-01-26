@@ -30,7 +30,7 @@ const TreeScreen = ({route, navigation}) => {
         db.transaction(tx => {
             tx.executeSql('SELECT * FROM tree WHERE formId = ' + '\'' + formId + '\'', [], (tx, results) => {
                 const rows = results.rows;
-                console.log(rows.item(0));
+                // console.log(rows.item(0));
                 setCurrentTree(rows.item(0));
             });
         });
@@ -52,7 +52,7 @@ const TreeScreen = ({route, navigation}) => {
         db.transaction(tx => {
             tx.executeSql('SELECT * FROM tree WHERE formId = \'' + formId + '\' AND id= \'' + targetId + '\'', [], (tx, results) => {
                 const rows = results.rows;
-                console.log(rows.item(0));
+                // console.log(rows.item(0));
                 setCurrentTree(rows.item(0));
             });
         });

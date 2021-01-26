@@ -44,7 +44,7 @@ const SplashScreen = (props) => {
                             Object.assign(category, {'forms': forms});
                             categories[position] = category;
                             if (position == categories.length - 1) {
-                                console.log(categories);
+                                // console.log(categories);
                                 props.navigation?.navigate('Categories', {list: categories});
                             }
                         });

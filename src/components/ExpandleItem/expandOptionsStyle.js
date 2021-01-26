@@ -3,7 +3,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp, } from 'react-na
 
 export default StyleSheet.create({
     flatListStyle: {
-        backgroundColor: 'red'
+        // backgroundColor: 'red',
+        
     }, listContentContainerStyle: {
 
     }
