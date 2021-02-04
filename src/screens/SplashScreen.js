@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, Button,Image } from 'react-native';
 import PatternBackground from '../components/PatternBackground';
-import {SvgXml} from 'react-native-svg';
-import {logoWhite, appLogo} from '../assets/svgs';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { SvgXml } from 'react-native-svg';
+import { logoWhite, appLogo } from '../assets/svgs';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import SQLite from 'react-native-sqlite-storage';
 
 const SplashScreen = (props) => {
@@ -41,11 +41,11 @@ const SplashScreen = (props) => {
                                 });
                             }
                             let category = categories[position];
-                            Object.assign(category, {'forms': forms});
+                            Object.assign(category, { 'forms': forms });
                             categories[position] = category;
                             if (position == categories.length - 1) {
                                 // console.log(categories);
-                                props.navigation?.navigate('Categories', {list: categories});
+                                props.navigation?.navigate('Categories', { list: categories });
                             }
                         });
                     });
@@ -56,8 +56,9 @@ const SplashScreen = (props) => {
 
     return (
         <View style={styles.container}>
-            <SvgXml style={styles.logoStyle} width={200} height={200} xml={appLogo}/>
-            <Text style={styles.title}>شناسایی اختلال dsm5</Text>
+            {/* <SvgXml style={styles.logoStyle} width={200} height={200} xml={appLogo}/>
+            <Text style={styles.title}>Differential Diagnosis Disorders</Text> */}
+            <Image style={styles.logoImageStyle} resizeMode='contain' source={require('../assets/logopng.png')} />
         </View>
     );
 };
@@ -65,11 +66,20 @@ const SplashScreen = (props) => {
 export default SplashScreen;
 
 const styles = StyleSheet.create({
+    logoImageStyle:{
+        height:300,
+        width:300,
+        marginTop:-50,
+        alignSelf: 'center',
+
+    },
     container: {
         alignSelf: 'center',
+        justifyContent:'center',
+        alignItems:'center',
         width: '100%',
         flex: 1,
-        marginTop: hp('30%'),
+        // marginTop: hp('30%'),
     },
     logoStyle: {
         alignSelf: 'center',

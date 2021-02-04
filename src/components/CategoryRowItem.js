@@ -1,14 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,Image} from 'react-native';
 import Card from './Card';
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 const CategoryGridItem = ({ item, index, onPress }) => {
     return (
         <Card style={styles.container}>
             <View onPress={onPress} style={styles.touch}>
                 <Text numberOfLines={2} style={styles.title}>{item.title}</Text>
-                <Text style={styles.row}>{index + 1}</Text>
+                {/* <Text style={styles.row}>{index + 1}</Text> */}
+                <Image style={styles.logoImageStyle} resizeMode='contain' source={require('../assets/desicionTree.png')} />
             </View>
         </Card>
     );
@@ -17,12 +18,16 @@ const CategoryGridItem = ({ item, index, onPress }) => {
 export default CategoryGridItem;
 
 const styles = StyleSheet.create({
+    logoImageStyle:{
+        width:30,height:30,
+        marginHorizontal:2
+    },
     parent: {},
     container: {
         // marginTop: 10,
         width: wp('92%'),
         backgroundColor: 'white',
-        borderRadius:10
+        borderRadius: 10
         // borderBottomRightRadius: 20,
         // borderTopRightRadius: 5,
         // borderTopLeftRadius: 20,
@@ -57,7 +62,7 @@ const styles = StyleSheet.create({
         color: 'black',
         marginLeft: 10,
         textAlign: 'center',
-        marginRight:10,
+        marginRight: 10,
         // fontWeight: 'bold',
         fontFamily: 'IRANSansWeb(FaNum)',
         alignSelf: 'flex-end',

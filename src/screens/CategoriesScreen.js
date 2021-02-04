@@ -7,6 +7,8 @@ import CustomHeader from '../components/CustomHeader';
 import { acceptDisable, gridMode, listMode } from '../assets/svgs';
 // import CategoryRowItem from '../components/CategoryRowItem';
 import ExpandableView from '../components/ExpandleItem/ExpandableView'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 const CategoriesScreen = ({ route, navigation }) => {
 
@@ -57,7 +59,7 @@ const CategoriesScreen = ({ route, navigation }) => {
                             emptyListComponent={<View><ActivityIndicator /></View>}
                             keyExtractor={(item, index) => '#' + index.toString()}
                             renderItem={({ item, index }) => (
-                                <ExpandableView item={item} index={index}
+                                <ExpandableView item={item} index={index} navigation={navigation}
                                     onPress={() => navigation?.navigate('Forms', { list: item.forms })} />
                             )}
                         />
@@ -69,12 +71,12 @@ const CategoriesScreen = ({ route, navigation }) => {
                             <SvgXml
                                 width={25}
                                 height={25}
-                               style={styles.fabIcon}
+                                style={styles.fabIcon}
                                 xml={listMode}
                             /> :
                             <SvgXml
                                 width={25}
-                               style={styles.fabIcon}
+                                style={styles.fabIcon}
                                 height={25}
                                 xml={gridMode}
                             />
@@ -89,12 +91,12 @@ export default CategoriesScreen;
 
 
 const styles = StyleSheet.create({
-    fabIcon:{
+    fabIcon: {
         // backgroundColor:'white'
     },
     container: {
         // alignItems:'center',
-        marginBottom:60
+        marginBottom: 60
     },
     contentContainerStyle: {
         alignSelf: 'center',
@@ -115,8 +117,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         // alignSelf:'flex-start',
-        right: 15,
-        bottom: 60,
+        right: wp('7%'),
+        bottom: hp('12%'),
         // padding: 10,
         // right: 10,
 

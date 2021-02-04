@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text,Image } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { appLogo } from '../assets/svgs';
 
@@ -7,7 +7,9 @@ const CustomHeader = ({ title }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
-            <SvgXml style={styles.icon} width={50} height={50} xml={appLogo} />
+            <Image style={styles.logoImageStyle} resizeMode='contain' source={require('../assets/onlyLogosdm5.png')} />
+
+            {/* <SvgXml style={styles.icon} width={50} height={50} xml={appLogo} /> */}
             {/* <Icon
                 style={styles.icon}
                 type='Ionicons'
@@ -21,6 +23,10 @@ const CustomHeader = ({ title }) => {
 export default CustomHeader;
 
 const styles = StyleSheet.create({
+    logoImageStyle:{
+        height: 50,
+width:50
+    },
     container: {
         justifyContent: 'flex-end',
         flexDirection: 'row',

@@ -37,7 +37,7 @@ function ExpandableView({ list, navigation, item, index }) {
                     <Pressable onPress={() => toggleRow1Content()}>
                         <CategoryRowItem item={item} index={index} />
                     </Pressable>
-                    <OptionsList list={item.forms} />
+                    <OptionsList list={item.forms} navigation={navigation} />
                 </Animated.ScrollView>
             </Animated.View>
         </View>
