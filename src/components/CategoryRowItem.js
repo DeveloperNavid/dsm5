@@ -3,7 +3,7 @@ import { StyleSheet, Text, View ,Image} from 'react-native';
 import Card from './Card';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-const CategoryGridItem = ({ item, index, onPress }) => {
+const CategoryRowItem = ({ item, index, onPress }) => {
     return (
         <Card style={styles.container}>
             <View onPress={onPress} style={styles.touch}>
@@ -15,7 +15,7 @@ const CategoryGridItem = ({ item, index, onPress }) => {
     );
 };
 
-export default CategoryGridItem;
+export default CategoryRowItem;
 
 const styles = StyleSheet.create({
     logoImageStyle:{
